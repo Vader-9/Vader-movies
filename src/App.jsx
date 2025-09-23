@@ -8,21 +8,21 @@ function App() {
 const url = import.meta.env.VITE_API_URL
 const keys = import.meta.env.VITE_API_KEY
 
-console.log("API URL:", url)
-console.log("API Key:", keys)
+//console.log("API URL:", url)
+//console.log("API Key:", keys)
 
-  console.log(url)
-  console.log(keys)
+ // console.log(url)
+  //console.log(keys)
 
   const [films, setFilms] = useState([])
-  const [error, setError] = useState()
+ // const [error, setError] = useState()
   //const [loading, setLoading] = useState(false)
   const [search, setSearch] = useState('')
   const [series, setSeries] = useState(false)
   
 
  
-//`http://www.omdbapi.com/?s=${search}&apikey=`
+
   const fetchFilm = async() => {
       try{
         const response = await axios.get(`${url}?s=${search}&apikey=${keys}`)
@@ -33,12 +33,12 @@ console.log("API Key:", keys)
         
       } catch (error){
         console.error(error)
-        setError('Error fetching data' + error.message)
+       // setError('Error fetching data' + error.message)
       }
     }
 
 
-console.log(error)
+//console.log(error)
   useEffect(()=>{
     fetchFilm(search)
   },[search])
@@ -49,10 +49,14 @@ console.log(films)
       <Sidebar setSeries={setSeries} />
       <div class="w-[80%]">
         <Nav  search={search} setSearch= {setSearch} />
-        {error ? <p>{error}</p> : <Movie films={films} search={search} series={series}/>}
+        <Movie films={films} search={search} series={series}/>
       </div>
     </div>
   )
 }
 
 export default App
+
+
+
+//`http://www.omdbapi.com/?s=${search}&apikey=`
