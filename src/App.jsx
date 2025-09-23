@@ -19,6 +19,7 @@ const keys = import.meta.env.VITE_API_KEY
   //const [loading, setLoading] = useState(false)
   const [search, setSearch] = useState('')
   const [series, setSeries] = useState(false)
+  const [showWatchList, setShowWatchList] = useState(false)
   
 
  
@@ -46,10 +47,10 @@ console.log(films)
 
   return (
     <div className="App">
-      <Sidebar setSeries={setSeries} />
+      <Sidebar setSeries={setSeries} setShowWatchList={setShowWatchList} />
       <div class="w-[80%]">
         <Nav  search={search} setSearch= {setSearch} />
-        <Movie films={films} search={search} series={series}/>
+        <Movie films={films} search={search} series={series} showWatchList={showWatchList}/>
       </div>
     </div>
   )

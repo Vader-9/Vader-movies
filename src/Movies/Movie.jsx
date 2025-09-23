@@ -1,10 +1,11 @@
-import { Heart } from "lucide-react";
+import { Heart, Plus } from "lucide-react";
 import { useState } from "react";
 import Favourites from "../Favourites";
-function Movie({films, search,series}){
+function Movie({films, series,  showWatchList}){
     //console.log(search)
 
     const [favourites, setFavourites] = useState([])
+    const [watchList, setWatchList] = useState([])
 
 
     function addToFavourites(film){
@@ -14,11 +15,20 @@ function Movie({films, search,series}){
             year:film.Year
         }])
     }
+
+    function addToWatchList(film){
+       setWatchList(prev => [...prev, {
+            movie : film.Title,
+            poster: film.Poster,
+            year:film.Year
+        }])
+
+    }
     
 
     const filmsSeries = films.filter((film) => film.Type === 'series')
    //  console.log(filmsSeries)
-    const filmDisplay = series ? filmsSeries : films
+    const filmDisplay = series ? filmsSeries : showWatchList ? watchList : films
 
     return(
         <div class="p-[20px] h-[calc(100vh-80px)] overflow-auto">
@@ -34,7 +44,10 @@ function Movie({films, search,series}){
                     <img src={film.Poster} alt={film.Title} />
                     <h2>{film.Title}</h2>
                     <p>{film.Year}</p>
-                    <button onClick={()=>addToFavourites(film)}><Heart /></button>
+                    <div>
+                        <button onClick={()=>addToFavourites(film)}><Heart /></button>
+                        <button onClick={()=>addToWatchList(film)}><Plus/></button>
+                    </div>
                 </div>))
                 }</div>
         </div>
