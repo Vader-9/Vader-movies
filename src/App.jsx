@@ -27,7 +27,7 @@ const keys = import.meta.env.VITE_API_KEY
   const fetchFilm = async() => {
       try{
         const response = await axios.get(`${url}?s=${search}&apikey=${keys}`)
-        console.log(response.data.Search)
+       // console.log(response.data.Search)
         if(response.data.Search){
           setFilms(response.data.Search)
         }
@@ -43,7 +43,7 @@ const keys = import.meta.env.VITE_API_KEY
   useEffect(()=>{
     fetchFilm(search)
   },[search])
-console.log(films)
+//console.log(films)
 
   return (
     <div className="App">
