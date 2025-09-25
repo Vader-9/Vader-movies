@@ -15,29 +15,37 @@ const keys = import.meta.env.VITE_API_KEY
   //console.log(keys)
 
   const [films, setFilms] = useState([])
- // const [error, setError] = useState()
+  const [error, setError] = useState('')
   //const [loading, setLoading] = useState(false)
   const [search, setSearch] = useState('')
   const [series, setSeries] = useState(false)
   const [showWatchList, setShowWatchList] = useState(false)
+  // set favourites state here and pass it to Movie component
+ // const [favourites, setFavourites] = useState([])
   
 
  
 
-  const fetchFilm = async() => {
-      try{
-        const response = await axios.get(`${url}?s=${search}&apikey=${keys}`)
-       // console.log(response.data.Search)
-        if(response.data.Search){
-          setFilms(response.data.Search)
-        }
-        
-      } catch (error){
-        console.error(error)
-       // setError('Error fetching data' + error.message)
-      }
-    }
+ const fetchFilm = async () => {
+  try {
+    const response = await axios.get(`${url}?s=${search}&apikey=${keys}`);
+    console.log(response.data.Response);
 
+    if (response.data.Response === "True" && response.data.Search) {
+      // Movies found
+      setFilms(response.data.Search);
+      setError(""); // clear any previous error
+    } else {
+      // No movies found
+      setFilms([]);
+      setError("No films found");
+    }
+  } catch (error) {
+    console.error(error);
+    setFilms([]);
+    setError("No internet connection, check your network.");
+  }
+};
 
 //console.log(error)
   useEffect(()=>{
@@ -50,7 +58,7 @@ const keys = import.meta.env.VITE_API_KEY
       <Sidebar setSeries={setSeries} setShowWatchList={setShowWatchList} />
       <div class="w-[80%]">
         <Nav  search={search} setSearch= {setSearch} />
-        <Movie films={films} search={search} series={series} showWatchList={showWatchList}/>
+        {error ? <p class='text-red-500 text-center mt-4'>{error}</p> : <Movie films={films} series={series} showWatchList={showWatchList}  />}
       </div>
     </div>
   )
