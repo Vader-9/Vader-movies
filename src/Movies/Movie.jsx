@@ -1,17 +1,16 @@
 import { Heart, Plus } from "lucide-react";
 import { useState } from "react";
-import Favourites from "../Favourites";
 import Watchlist from "../Watchlist";
-function Movie({ films, series, showWatchList }) {
+function Movie({ films, series, showWatchList, setFavourites }) {
     //console.log(search)
 
-    const [favourites, setFavourites] = useState([])
+    
     const [watchList, setWatchList] = useState([])
 
 
     function addToFavourites(film) {
         setFavourites(prev => [...prev, {
-            id: Date.now(),
+            id: film.imdbID,
             movie: film.Title,
             poster: film.Poster,
             year: film.Year
@@ -20,7 +19,7 @@ function Movie({ films, series, showWatchList }) {
 
     function addToWatchList(film) {
         setWatchList(prev => [...prev, {
-            id: Date.now(),
+            id: film.imdbID,
             movie: film.Title,
             poster: film.Poster,
             year: film.Year
@@ -39,7 +38,7 @@ function Movie({ films, series, showWatchList }) {
                 <button>All Films</button>
                
             </header>
-            <Favourites favourites={favourites} setFavourites={setFavourites} />
+            
             <div class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4'>{
                 showWatchList ? <Watchlist watchList={watchList} setWatchList={setWatchList} /> : filmDisplay.map((film) => (<div key={film.id}>
                     <img src={film.Poster} alt={film.Title} />

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import Movie from "./Movies/Movie"
 import Nav from "./Nav/Nav"
 import Sidebar from "./Sidebar/Sidebar"
+import Favourites from "./Favourites"
 import axios from "axios"
 function App() {
 
@@ -21,7 +22,7 @@ const keys = import.meta.env.VITE_API_KEY
   const [series, setSeries] = useState(false)
   const [showWatchList, setShowWatchList] = useState(false)
   // set favourites state here and pass it to Movie component
- // const [favourites, setFavourites] = useState([])
+  const [favourites, setFavourites] = useState([])
   
 
  
@@ -58,7 +59,8 @@ const keys = import.meta.env.VITE_API_KEY
       <Sidebar setSeries={setSeries} setShowWatchList={setShowWatchList} />
       <div class="w-[80%]">
         <Nav  search={search} setSearch= {setSearch} />
-        {error ? <p class='text-red-500 text-center mt-4'>{error}</p> : <Movie films={films} series={series} showWatchList={showWatchList}  />}
+        <Favourites favourites={favourites}  />
+        {error ?  <p class='text-red-500 text-center mt-4'>{error}</p> : <Movie films={films} series={series} showWatchList={showWatchList} setFavourites={setFavourites}  />}
       </div>
     </div>
   )
