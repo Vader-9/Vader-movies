@@ -1,32 +1,50 @@
 import { Heart, Plus } from "lucide-react";
 import { useState } from "react";
 import Watchlist from "../Watchlist";
-function Movie({ films, series, showWatchList, setFavourites }) {
+function Movie({ films, series, showWatchList, favourites, setFavourites }) {
     //console.log(search)
 
-    
+
     const [watchList, setWatchList] = useState([])
 
 
     function addToFavourites(film) {
-        setFavourites(prev => [...prev, {
-            id: film.imdbID,
-            movie: film.Title,
-            poster: film.Poster,
-            year: film.Year
-        }])
+
+        const exists = watchList.find(item => item.id === film.imdbID);
+        if (exists) {
+            alert("This film is already in your watchlist");
+            return;
+        } else {
+            setFavourites(prev => [...prev, {
+                id: film.imdbID,
+                movie: film.Title,
+                poster: film.Poster,
+                year: film.Year
+            }])
+        }
+
+
     }
 
     function addToWatchList(film) {
-        setWatchList(prev => [...prev, {
-            id: film.imdbID,
-            movie: film.Title,
-            poster: film.Poster,
-            year: film.Year
-        }])
+
+        const exist = favourites.find((item) => item.id === film.imdbID);
+        if (exist) {
+            alert("This film is already in your favourites");
+            return;
+        } else {
+            setWatchList(prev => [...prev, {
+                id: film.imdbID,
+                movie: film.Title,
+                poster: film.Poster,
+                year: film.Year
+            }])
+        }
+
+
 
     }
-   console.log(watchList)
+    console.log(watchList)
 
     const filmsSeries = films.filter((film) => film.Type === 'series')
     //  console.log(filmsSeries)
@@ -36,9 +54,9 @@ function Movie({ films, series, showWatchList, setFavourites }) {
         <div class="p-[20px] h-[calc(100vh-80px)] overflow-auto">
             <header class='flex justify-center gap-[20px] p-[10px]  mb-[20px]'>
                 <button>All Films</button>
-               
+
             </header>
-            
+
             <div class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4'>{
                 showWatchList ? <Watchlist watchList={watchList} setWatchList={setWatchList} /> : filmDisplay.map((film) => (<div key={film.id}>
                     <img src={film.Poster} alt={film.Title} />
