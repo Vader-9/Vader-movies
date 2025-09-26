@@ -11,6 +11,13 @@ function Movie({ films, series, showWatchList, favourites, setFavourites }) {
     function addToFavourites(film) {
 
         const exists = watchList.find(item => item.id === film.imdbID);
+        const alreadyInFavourites = favourites.find((item) => item.id === film.imdbID);
+
+        if (alreadyInFavourites) {
+            alert("This film is already in your favourites");
+            return;
+        }
+
         if (exists) {
             alert("This film is already in your watchlist");
             return;
@@ -29,17 +36,24 @@ function Movie({ films, series, showWatchList, favourites, setFavourites }) {
     function addToWatchList(film) {
 
         const exist = favourites.find((item) => item.id === film.imdbID);
+        const alreadyInWatchlist = watchList.find((item) => item.id === film.imdbID);
+
+        if (alreadyInWatchlist) {
+            alert("This film is already in your watchlist");
+            return;
+        }
+
         if (exist) {
             alert("This film is already in your favourites");
             return;
-        } else {
+        } 
             setWatchList(prev => [...prev, {
                 id: film.imdbID,
                 movie: film.Title,
                 poster: film.Poster,
                 year: film.Year
             }])
-        }
+        
 
 
 
@@ -58,7 +72,7 @@ function Movie({ films, series, showWatchList, favourites, setFavourites }) {
             </header>
 
             <div class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4'>{
-                showWatchList ? <Watchlist watchList={watchList} setWatchList={setWatchList} /> : filmDisplay.map((film) => (<div key={film.id}>
+                showWatchList ? <Watchlist watchList={watchList} setWatchList={setWatchList} /> : filmDisplay.map((film) => (<div key={film.imdbID}>
                     <img src={film.Poster} alt={film.Title} />
                     <h2>{film.Title}</h2>
                     <p>{film.Year}</p>
