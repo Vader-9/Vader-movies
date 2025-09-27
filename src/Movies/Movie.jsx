@@ -1,5 +1,5 @@
 import { Heart, Plus } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Watchlist from "../Watchlist";
 function Movie({ films, series, showWatchList, favourites, setFavourites }) {
     //console.log(search)
@@ -66,12 +66,10 @@ function Movie({ films, series, showWatchList, favourites, setFavourites }) {
     //  console.log(filmsSeries)
     const filmDisplay = series ? filmsSeries : films
 
-  /*  if(filmsSeries){
-        setMovieGenre('Series')
-    }else{
-        setMovieGenre('All Movies')
-    }
-  */
+   useEffect(() => {
+    setMovieGenre(series ? 'Series' : 'All')
+   }   , [series])
+  
     return (
         <div class="p-[20px] h-[calc(100vh-80px)] overflow-auto">
             <header class='flex justify-center gap-[20px] p-[10px]  mb-[20px]'>

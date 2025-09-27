@@ -22,7 +22,10 @@ function App() {
   const [series, setSeries] = useState(false)
   const [showWatchList, setShowWatchList] = useState(false)
   // set favourites state here and pass it to Movie component
-  const [favourites, setFavourites] = useState([])
+  const [favourites, setFavourites] = useState(() => {
+  const storedFavourites = localStorage.getItem("favourites");
+  return storedFavourites ? JSON.parse(storedFavourites) : [];
+})
 
 
 
