@@ -1,36 +1,39 @@
-import { Film  } from "lucide-react";
+import { Film } from "lucide-react";
 
-function Sidebar({setSeries, setShowWatchList}){
+function Sidebar({ setSeries, setShowWatchList }) {
 
-  function allMovies(){
+  function allMovies() {
     setSeries(false)
     setShowWatchList(false)
   }
 
-  function allSeries(){
+  function allSeries() {
     setSeries(true)
     setShowWatchList(false)
   }
 
-  function allWatch(){
+  function allWatch() {
     setSeries(false)
     setShowWatchList(true)
   }
 
-    return(<div class =" h-194 w-[20%] p-[10px] border overflow-hidden">
+  return (
+    <div class="  h-194 w-[20%] p-[10px] border overflow-hidden">
       <h1>Vader-movies</h1>
       <p>Films</p>
-      <button onClick={allMovies}>
-       <Film />
-         <p>All FIlms</p>
-      </button>
-      <button onClick={allSeries}>
-        <p>Series</p>
-      </button>
-      <button onClick={allWatch} >
-        <p>My Watchlist</p>
-      </button>
-      
+      <div>
+        <div onClick={allMovies} className="flex mb-[20px]">
+          <Film />
+          <p>All FIlms</p>
+        </div>
+        <div onClick={allSeries} className="flex mb-[20px]">
+          <p>Series</p>
+        </div>
+        <div onClick={allWatch} className="flex mb-[20px]" >
+          <p>My Watchlist</p>
+        </div>
+      </div>
+
     </div>)
 }
 

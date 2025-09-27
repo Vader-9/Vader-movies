@@ -1,8 +1,10 @@
 @import "tailwindcss";
 
-
 .App{
-    min-height: 100vh;
+    height: 100%;
     display: flex;
+    background-color:#ca6edc;
+    backdrop-filter: blur(10px);
+    color:white;
 }
 

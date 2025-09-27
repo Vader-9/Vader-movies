@@ -17,7 +17,7 @@ function App() {
 
   const [films, setFilms] = useState([])
   const [error, setError] = useState('')
- // const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [search, setSearch] = useState('')
   const [series, setSeries] = useState(false)
   const [showWatchList, setShowWatchList] = useState(false)
@@ -28,6 +28,7 @@ function App() {
 
 
   const fetchFilm = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(`${url}?s=${search}&apikey=${keys}`);
       console.log(response.data.Response);
@@ -38,15 +39,23 @@ function App() {
         setError(""); // clear any previous error
       } else {
         // No movies found
-        setFilms([]);
-        setError("No films found");
-      }
+        if (response.data.Response === "False") {
+          setFilms([]);
+          setError("Please select  a movie");
+        } else {
+          setFilms([]);
+          setError("No movies found");
+        }
+      } // ✅ this was missing
     } catch (error) {
       console.error(error);
       setFilms([]);
       setError("No internet connection, check your network.");
+    } finally {
+      setLoading(false);
     }
   };
+
 
   //console.log(error)
   useEffect(() => {
@@ -60,14 +69,14 @@ function App() {
       <div class="w-[80%]">
         <Nav search={search} setSearch={setSearch} />
         <Favourites favourites={favourites} />
-        { error ? <p class='text-red-500 text-center mt-4'>{error}</p> : <Movie films={films} series={series} showWatchList={showWatchList} favourites={favourites} setFavourites={setFavourites} />}
+        {loading ? (
+          <div className="flex justify-center items-center h-40">
+            <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        ) : error ? <p class='text-red-500 text-center mt-4'>{error}</p> : search ? <Movie films={films} series={series} showWatchList={showWatchList} favourites={favourites} setFavourites={setFavourites} /> : <p>pls select movie</p>}
       </div>
     </div>
   )
 }
 
-export default App
-
-
-
-//`http://www.omdbapi.com/?s=${search}&apikey=`
+export default App  // hello pls i want to add loading and an intial message of s=find movie how do i go about it  

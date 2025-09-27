@@ -6,6 +6,8 @@ function Movie({ films, series, showWatchList, favourites, setFavourites }) {
 
 
     const [watchList, setWatchList] = useState([])
+    const [movieGerne, setMovieGenre] = useState('All')
+    
 
 
     function addToFavourites(film) {
@@ -64,10 +66,16 @@ function Movie({ films, series, showWatchList, favourites, setFavourites }) {
     //  console.log(filmsSeries)
     const filmDisplay = series ? filmsSeries : films
 
+  /*  if(filmsSeries){
+        setMovieGenre('Series')
+    }else{
+        setMovieGenre('All Movies')
+    }
+  */
     return (
         <div class="p-[20px] h-[calc(100vh-80px)] overflow-auto">
             <header class='flex justify-center gap-[20px] p-[10px]  mb-[20px]'>
-                <button>All Films</button>
+                <p>{movieGerne}</p>
 
             </header>
 
