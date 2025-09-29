@@ -5,7 +5,15 @@ function Movie({ films, series, showWatchList, favourites, setFavourites }) {
     //console.log(search)
 
 
-    const [watchList, setWatchList] = useState([])
+    const [watchList, setWatchList] = useState(() => {
+    const storedWatch = localStorage.getItem("watchList");
+  return storedWatch ? JSON.parse(storedWatch) : [];
+})
+
+useEffect(()=>{
+    localStorage.setItem('watchList', JSON.stringify(watchList))
+},[watchList])
+
     const [movieGerne, setMovieGenre] = useState('All')
     
 
@@ -79,7 +87,7 @@ function Movie({ films, series, showWatchList, favourites, setFavourites }) {
 
             <div class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4'>{
                 showWatchList ? <Watchlist watchList={watchList} setWatchList={setWatchList} /> : filmDisplay.map((film) => (<div key={film.imdbID}>
-                    <img src={film.Poster} alt={film.Title} />
+                    <img src={film.Poster !== 'N/A' ? film.Poster : "https://via.placeholder.com/300x450?text=No+Image"} alt={film.Title} />
                     <h2>{film.Title}</h2>
                     <p>{film.Year}</p>
                     <div>

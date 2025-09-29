@@ -18,7 +18,7 @@ function Sidebar({ setSeries, setShowWatchList }) {
   }
 
   return (
-    <div class="  h-194 w-[20%] p-[10px] border overflow-hidden">
+    <div class="  h-194 w-[20%] p-[10px]  overflow-hidden">
       <h1>Vader-movies</h1>
       <p>Films</p>
       <div>

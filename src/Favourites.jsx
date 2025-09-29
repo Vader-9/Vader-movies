@@ -1,13 +1,17 @@
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { X } from "lucide-react"
 
 function Favourites({ favourites, setFavourites }) {
-  console.log(favourites);
+  //console.log(favourites);
 
-  function removeFavourites(id) {
-    setFavourites(favourites.filter((film) => film.id !== id));
-  }
+  
+ function removeFavourites(id) {
+    const updatedFavourites = favourites.filter((film) => film.id !== id);
+    setFavourites(updatedFavourites);
+   // localStorage.setItem("favourites", JSON.stringify(updatedFavourites));
+    //console.log("Removed film with ID:", id);
+  } 
 
   // ✅ Save favourites to localStorage every time they update
   useEffect(() => {
@@ -21,7 +25,7 @@ function Favourites({ favourites, setFavourites }) {
           <img src={film.poster} alt={film.movie} className="h-[80%]" />
           <h2>{film.movie}</h2>
           <p>{film.year}</p>
-          <button onClick={() => removeFavourites(film.id)}>
+          <button onClick={()=>removeFavourites(film.id)}>
             <X />
           </button>
         </div>
