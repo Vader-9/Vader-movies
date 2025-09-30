@@ -21,12 +21,14 @@ function App() {
   const [loading, setLoading] = useState(false)
   const [search, setSearch] = useState('')
   const [series, setSeries] = useState(false)
+ // const [listLabel, setListLabel] = useState(true)
   const [showWatchList, setShowWatchList] = useState(false)
   // set favourites state here and pass it to Movie component
   const [favourites, setFavourites] = useState(() => {
   const stored = localStorage.getItem("favourites");
   return stored ? JSON.parse(stored) : [];
 });
+
 // the login page
 const [login, setLogin] = useState(false)
 
@@ -90,6 +92,7 @@ const [login, setLogin] = useState(false)
               showWatchList={showWatchList}
               favourites={favourites}
               setFavourites={setFavourites}
+              
             />
           ) : (
             <p>pls select movie</p>

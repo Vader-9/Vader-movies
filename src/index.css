@@ -1,11 +1,21 @@
 @import "tailwindcss";
 
-.App{
-    min-height: 100vh;
-    display: flex;
-    background-color:rgb(0, 0, 0);
-    backdrop-filter: blur(10px);
-    color:white;
+.App {
+  min-height: 100vh;
+  display: flex;
+  background-color: #111827;  /* Tailwind's gray-900 */
+  backdrop-filter: blur(10px);
+  color: white;
+
+  /* hide scrollbars */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
 }
+
+/* Hide scrollbar for Chrome, Safari, Opera */
+.App::-webkit-scrollbar {
+  display: none;
+}
+
 
 

@@ -1,14 +1,14 @@
 import { Heart, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 import Watchlist from "../Watchlist";
-function Movie({ films, series, showWatchList, favourites, setFavourites }) {
+function Movie({ films, series, showWatchList, favourites, setFavourites, }) {
     //console.log(search)
 
 
     const [watchList, setWatchList] = useState(() => {
     const storedWatch = localStorage.getItem("watchList");
   return storedWatch ? JSON.parse(storedWatch) : [];
-})
+}) 
 
 useEffect(()=>{
     localStorage.setItem('watchList', JSON.stringify(watchList))
@@ -79,24 +79,55 @@ useEffect(()=>{
    }   , [series])
   
     return (
-        <div class="p-[20px] h-[calc(100vh-80px)] overflow-auto">
-            <header class='flex justify-center gap-[20px] p-[10px]  mb-[20px]'>
-                <p>{movieGerne}</p>
+        <div className="p-5 h-[calc(100vh-80px)] overflow-auto bg-gray-900 text-white">
+  <header className="flex justify-center gap-5 p-4 mb-6">
+    <p className="text-2xl font-bold text-yellow-400 tracking-wide">
+      {movieGerne}
+    </p>
+  </header>
 
-            </header>
-
-            <div class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4'>{
-                showWatchList ? <Watchlist watchList={watchList} setWatchList={setWatchList} /> : filmDisplay.map((film) => (<div key={film.imdbID}>
-                    <img src={film.Poster !== 'N/A' ? film.Poster : "https://via.placeholder.com/300x450?text=No+Image"} alt={film.Title} />
-                    <h2>{film.Title}</h2>
-                    <p>{film.Year}</p>
-                    <div>
-                        <button onClick={() => addToFavourites(film)}><Heart /></button>
-                        <button onClick={() => addToWatchList(film)}><Plus /></button>
-                    </div>
-                </div>))
-            }</div>
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-2">
+    {showWatchList ? (
+      <Watchlist watchList={watchList} setWatchList={setWatchList} />
+    ) : (
+      filmDisplay.map((film) => (
+        <div
+          key={film.imdbID}
+          className="bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:scale-105 transform transition duration-300 ease-in-out"
+        >
+          <img
+            src={
+              film.Poster !== "N/A"
+                ? film.Poster
+                : "https://via.placeholder.com/300x450?text=No+Image"
+            }
+            alt={film.Title}
+            className="w-full h-72 object-cover"
+          />
+          <div className="p-4">
+            <h2 className="text-lg font-semibold truncate">{film.Title}</h2>
+            <p className="text-sm text-gray-400">{film.Year}</p>
+            <div className="flex gap-3 mt-3">
+              <button
+                onClick={() => addToFavourites(film)}
+                className="p-2 bg-red-500 rounded-full hover:bg-red-600 transition"
+              >
+                <Heart className="w-5 h-5" />
+              </button>
+              <button
+                onClick={() => addToWatchList(film)}
+                className="p-2 bg-green-500 rounded-full hover:bg-green-600 transition"
+              >
+                <Plus className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
         </div>
+      ))
+    )}
+  </div>
+</div>
+
     )
 }
 

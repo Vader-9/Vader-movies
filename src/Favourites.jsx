@@ -19,7 +19,7 @@ function Favourites({ favourites, setFavourites }) {
   }, [favourites]);
 
   return (
-    <div className="flex gap-4 p-4 h-[150px] mb-[20px] border-b-[1px] border-gray-300 pb-[20px] overflow-auto">
+    <div className="flex gap-4 p-10 h-[180px] mb-[20px]  pb-[20px] overflow-auto">
       {favourites.map((film) => (
         <div key={film.id} className="flex flex-col items-center">
           <img src={film.poster} alt={film.movie} className="h-[80%]" />
