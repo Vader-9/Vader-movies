@@ -14,7 +14,7 @@ function Nav({ search, setSearch, setLogin}){
       value={search}
       onChange={(e) => setSearch(e.target.value)}
       placeholder="Search movies..."
-      className="outline-0 bg-transparent w-full sm:w-[300px] p-2 text-sm"
+      className="outline-0 bg-transparent w-full sm:w-[300px] pt-2 pd-2 pl-10 text-sm"
     />
     <button className="p-2 rounded-md hover:bg-gray-800 transition">
       <Search className="w-5 h-5" />
@@ -29,9 +29,7 @@ function Nav({ search, setSearch, setLogin}){
     >
       Sign Up
     </button>
-    <button className="px-4 py-2 bg-gray-700 rounded-md hover:bg-gray-600 transition">
-      Dark Mode
-    </button>
+    
   </div>
 </div>
 
